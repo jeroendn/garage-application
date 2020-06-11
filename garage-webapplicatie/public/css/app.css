@@ -10938,7 +10938,7 @@ html body header {
 }
 
 html body header nav.navbar {
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 html body header nav.navbar ul {
@@ -10948,12 +10948,12 @@ html body header nav.navbar ul {
   margin-bottom: 0;
 }
 
-html body header nav.navbar ul li {
-  list-style: none;
+html body header nav.navbar ul > *:not(:last-child) {
+  margin-right: 20px;
 }
 
-html body header nav.navbar ul li:not(:last-child) {
-  margin-right: 20px;
+html body header nav.navbar ul li {
+  list-style: none;
 }
 
 html body header nav.navbar ul li a {
@@ -10963,6 +10963,16 @@ html body header nav.navbar ul li a {
 
 html body header nav.navbar ul li a:hover {
   color: #fff;
+}
+
+html body header nav.navbar ul:last-of-type div {
+  display: flex;
+  flex-flow: column;
+}
+
+html body header nav.navbar ul:last-of-type div span {
+  color: #fff;
+  line-height: initial;
 }
 
 html body .page-title-wrapper {

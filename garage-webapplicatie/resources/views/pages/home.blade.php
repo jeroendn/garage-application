@@ -4,6 +4,7 @@
 
 @section('content')
 
+  @if(!Auth::check())
   <div class="row box login-form">
     <form method="POST" action="{{ route('login') }}" class="col">
       @csrf
@@ -181,6 +182,7 @@
       </div>
     </form>
   </div>
+  @endif
 
 {{--  <ul>--}}
 {{--    @forelse($customers as $customer)--}}
