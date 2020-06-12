@@ -9,8 +9,6 @@ class PageController extends Controller
 
   public function home()
   {
-//    $customers = \App\Customers::all(); compact('customers')
-
     return view('pages.home');
   }
 
