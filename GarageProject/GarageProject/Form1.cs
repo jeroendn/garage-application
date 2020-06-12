@@ -16,5 +16,11 @@ namespace GarageProject
         {
             InitializeComponent();
         }
+
+        private void btnInlog_Click(object sender, EventArgs e)
+        {
+            DBConnect db = new DBConnect();
+            PasswordHash ph = new PasswordHash();
+        }
     }
 }

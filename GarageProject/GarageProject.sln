@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageProject", "GarageProject\GarageProject.csproj", "{AF9EF4CB-0F6F-4923-B454-C5C559DC2509}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Classes", "Classes", "{6C4F4583-4A07-4DB7-8A9A-CBA92F47431F}"
+	ProjectSection(SolutionItems) = preProject
+		GarageProject\PasswordHash.cs = GarageProject\PasswordHash.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
