@@ -19,4 +19,9 @@ class PageController extends Controller
     return view('pages.dashboard');
   }
 
+  public function appointment()
+  {
+    return view('pages.appointment');
+  }
+
 }
