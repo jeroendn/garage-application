@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', env('APP_NAME') . ' - Dashboard')
+@section('title', 'Dashboard - ' . env('APP_NAME'))
 
 @section('content')
 

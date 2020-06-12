@@ -4,7 +4,7 @@ html {
       background: $accent1;
 
       nav.navbar {
-        justify-content: flex-end;
+        justify-content: space-between;
 
         ul {
           display: flex;
@@ -12,11 +12,15 @@ html {
           padding: 0;
           margin-bottom: 0;
 
+          > *:not(:last-child) {
+            margin-right: 20px;
+          }
+
           li {
             list-style: none;
 
-            &:not(:last-child) {
-              margin-right: 20px;
+            &:not(:last-of-type) {
+
             }
 
             a {
@@ -25,6 +29,18 @@ html {
 
               &:hover {
                 color: #fff;
+              }
+            }
+          }
+
+          &:last-of-type {
+            div {
+              display: flex;
+              flex-flow: column;
+
+              span {
+                color: #fff;
+                line-height: initial;
               }
             }
           }

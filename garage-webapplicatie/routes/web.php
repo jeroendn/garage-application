@@ -18,7 +18,8 @@ Auth::routes();
 
 Route::get('/', 'PageController@home');
 Route::get('/home', 'PageController@home');
-Route::get('/dashboard', 'PageController@dashboard');
+Route::get('/dashboard', 'PageController@dashboard')->middleware('auth');
+Route::get('/afspraak-maken', 'PageController@appointment')->middleware('auth');
 
 
 

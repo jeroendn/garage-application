@@ -9,14 +9,17 @@ class PageController extends Controller
 
   public function home()
   {
-//    $customers = \App\Customers::all(); compact('customers')
-
     return view('pages.home');
   }
 
   public function dashboard()
   {
     return view('pages.dashboard');
+  }
+
+  public function appointment()
+  {
+    return view('pages.appointment');
   }
 
 }

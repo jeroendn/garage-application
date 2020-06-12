@@ -1,9 +1,10 @@
 @extends('app')
 
-@section('title', env('APP_NAME') . ' - Home')
+@section('title', 'Home - ' . env('APP_NAME'))
 
 @section('content')
 
+  @if(!Auth::check())
   <div class="row box login-form">
     <form method="POST" action="{{ route('login') }}" class="col">
       @csrf
@@ -181,13 +182,10 @@
       </div>
     </form>
   </div>
+  @endif
 
-{{--  <ul>--}}
-{{--    @forelse($customers as $customer)--}}
-{{--      <li>{{ $customer->firstname }}</li>--}}
-{{--    @empty--}}
-{{--      <li>Nothing to show</li>--}}
-{{--    @endforelse--}}
-{{--  </ul>--}}
+  <div class="mt-5">
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.</p>
+  </div>
 
 @endsection
