@@ -19,12 +19,12 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('option_id');
             $table->foreign('option_id')->references('id')->on('appointment_options');
-            $table->mediumText('comment');
+            $table->mediumText('comment')->default('');
             $table->string('licence_plate');
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('appointment_status');
-            $table->double('hours');
-            $table->double('total_price');
+            $table->double('hours')->default(0);
+            $table->double('total_price')->default(0);
             $table->timestamps();
         });
     }

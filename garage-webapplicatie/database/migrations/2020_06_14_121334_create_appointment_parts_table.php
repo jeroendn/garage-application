@@ -18,8 +18,8 @@ class CreateAppointmentPartsTable extends Migration
             $table->foreign('appointment_id')->references('id')->on('appointments');
             $table->unsignedBigInteger('part_id');
             $table->foreign('part_id')->references('id')->on('parts');
-            $table->integer('amount');
-            $table->double('price_per_piece');
+            $table->integer('amount')->default(1);
+            $table->double('price_per_piece')->default(0);
             $table->timestamps();
         });
     }

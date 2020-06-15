@@ -16,7 +16,7 @@ class CreateAppointmentOptionsTable extends Migration
         Schema::create('appointment_options', function (Blueprint $table) {
             $table->id();
             $table->string('option')->unique();
-            $table->double('price_per_hour');
+            $table->double('price_per_hour')->default(0);
             $table->timestamps();
         });
     }

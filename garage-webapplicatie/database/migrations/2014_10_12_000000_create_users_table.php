@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('street');
-            $table->integer('street_number');
-            $table->string('zip');
+            $table->string('street')->default('');
+            $table->integer('street_number')->default(0);
+            $table->string('zip')->default('');
             $table->timestamps();
         });
     }
