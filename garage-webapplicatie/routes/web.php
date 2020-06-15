@@ -21,5 +21,6 @@ Route::get('/home', 'PageController@home');
 Route::get('/dashboard', 'PageController@dashboard')->middleware('auth');
 Route::get('/afspraak-maken', 'PageController@appointment')->middleware('auth');
 
+Route::post('/make-appointment', 'PostController@makeAppointment');
 
 
