@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
+use Egulias\EmailValidator\Exception\AtextAfterCFWS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,9 @@ class PostController extends Controller
     public function makeAppointment(Request $request)
     {
         $request->validate([
-            'licence' => 'required'
+            'licence' => 'required',
+            'option' => 'required',
+            'date' => 'required'
         ]);
 
         $appointment = new Appointment();
@@ -24,11 +27,12 @@ class PostController extends Controller
         $appointment->hours = 1;
         $appointment->total_price = 1;
         $appointment->licence_plate = request('licence');
+        $appointment->setCreatedAt(request('date'));
         $appointment->save();
 
-        dd($appointment);
+        // dd($appointment);
 
-        //return redirect()->back();
+        return redirect()->back()->with('message', 'Afspraak is succesvol geplanned.');
     }
 
 }

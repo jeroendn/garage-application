@@ -19,11 +19,12 @@ class PageController extends Controller
 
     public function appointment()
     {
+        $appointments = \App\Appointment::all();
         $appointmentOptions = \App\AppointmentOptions::all();
 
         // dd($appointmentOptions);
 
-        return view('pages.appointment', compact('appointmentOptions'));
+        return view('pages.appointment', compact('appointments', 'appointmentOptions'));
     }
 
 }

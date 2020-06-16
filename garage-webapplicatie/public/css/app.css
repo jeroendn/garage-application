@@ -11028,3 +11028,7 @@ html body footer a:hover {
   background: rgba(0, 0, 0, 0.125);
 }
 
+.alert {
+  text-align: center;
+}
+

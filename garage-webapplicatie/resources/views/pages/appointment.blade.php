@@ -8,6 +8,52 @@
     <form method="POST" action="{{ action('PostController@makeAppointment') }}">
       @csrf
 
+      @if(session()->has('message'))
+        <div class="alert alert-success">
+          {{ session()->get('message') }}
+        </div>
+      @endif
+
+      {{--   datepicker   --}}
+      <div class="form-group row">
+        <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Kies een datum') }}</label>
+
+        <div class="col-md-6">
+          <input type="text" id="date" name="date" autocomplete="off" class="form-control" required>
+        </div>
+      </div>
+
+{{--      @forelse($appointments as $appointment)--}}
+{{--        <p>{{ date('d M yy', strtotime($appointment->created_at)) . ' ' . $appointment->licence_plate }}</p>--}}
+{{--      @empty--}}
+{{--        <p>Geen datums gevonden!</p>--}}
+{{--      @endforelse--}}
+
+      <script type="text/javascript">
+        let disabledDates = [
+          @foreach($appointments as $appointment)
+          "{{ date('d/m/yy', strtotime($appointment->created_at)) }}",
+          @endforeach
+        ];
+
+        //let disabledDates = ["20/01/2018", "21/01/2018", "22/01/2018", "10/06/2020"];
+
+        function DisableDates(date) {
+          let string = jQuery.datepicker.formatDate('dd/mm/yy', date);
+          return [disabledDates.indexOf(string) === -1];
+        }
+
+        $("#date").datepicker({
+          changeYear: true,
+          dateFormat: 'dd MM yy',
+          minDate: 0,
+          maxDate: '+1Y',
+          firstDay: 1,
+          // daysOfWeekDisabled: [0,6],
+          beforeShowDay: DisableDates
+        });
+      </script>
+
       {{--   options   --}}
       <div class="form-group row">
         <label for="option" class="col-md-4 col-form-label text-md-right">{{ __('Kies uw afspraak') }}</label>
@@ -20,12 +66,6 @@
               <option value="" disabled>No options available</option>
             @endforelse
           </select>
-
-          @error('option')
-          <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-          </span>
-          @enderror
         </div>
       </div>
 
