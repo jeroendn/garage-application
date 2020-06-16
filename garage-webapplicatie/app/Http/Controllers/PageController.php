@@ -7,19 +7,23 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
 
-  public function home()
-  {
-    return view('pages.home');
-  }
+    public function home()
+    {
+        return view('pages.home');
+    }
 
-  public function dashboard()
-  {
-    return view('pages.dashboard');
-  }
+    public function dashboard()
+    {
+        return view('pages.dashboard');
+    }
 
-  public function appointment()
-  {
-    return view('pages.appointment');
-  }
+    public function appointment()
+    {
+        $appointmentOptions = \App\AppointmentOptions::all();
+
+        // dd($appointmentOptions);
+
+        return view('pages.appointment', compact('appointmentOptions'));
+    }
 
 }

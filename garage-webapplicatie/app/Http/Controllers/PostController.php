@@ -18,17 +18,17 @@ class PostController extends Controller
         $appointment = new Appointment();
 
         $appointment->user_id = Auth::id();
-        $appointment->option_id = 1;
-        $appointment->comment = request('comment');
+        $appointment->option_id = request('option');
+        if (!is_null(request('comment'))) { $appointment->comment = request('comment'); }
         $appointment->status_id = 1;
         $appointment->hours = 1;
         $appointment->total_price = 1;
         $appointment->licence_plate = request('licence');
         $appointment->save();
 
-        dd($request->licence);
+        dd($appointment);
 
-//        return redirect()->back();
+        //return redirect()->back();
     }
 
 }

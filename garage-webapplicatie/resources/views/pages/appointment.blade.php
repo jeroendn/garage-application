@@ -8,14 +8,35 @@
     <form method="POST" action="{{ action('PostController@makeAppointment') }}">
       @csrf
 
+      {{--   options   --}}
+      <div class="form-group row">
+        <label for="option" class="col-md-4 col-form-label text-md-right">{{ __('Kies uw afspraak') }}</label>
+
+        <div class="col-md-6">
+          <select id="option" name="option" class="form-control">
+            @forelse($appointmentOptions as $option)
+              <option value="{{ $option->id }}">{{ $option->option }}</option>
+            @empty
+              <option value="" disabled>No options available</option>
+            @endforelse
+          </select>
+
+          @error('option')
+          <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+          </span>
+          @enderror
+        </div>
+      </div>
+
       {{--   comment   --}}
       <div class="form-group row">
         <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('Toelichting') }}</label>
 
         <div class="col-md-6">
-          <textarea id="comment" class="form-control @error('comment') is-invalid @enderror" name="comment" placeholder="(Optioneel) Voeg een toelichting toe"></textarea>
+          <textarea id="comment" class="form-control @error('comment') is-invalid @enderror" name="comment" maxlength="5592405" placeholder="(Optioneel) Voeg een toelichting toe"></textarea>
 
-          @error('licence')
+          @error('comment')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
           </span>
@@ -39,7 +60,7 @@
       </div>
 
       {{--   submit   --}}
-      <div class="form-group row mb-0">
+      <div class="form-group row mb-0 d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">
           {{ __('Maak afspraak') }}
         </button>
