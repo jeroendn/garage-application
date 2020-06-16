@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
@@ -26,6 +27,10 @@ class CreateUsersTable extends Migration
             $table->string('zip')->default('');
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            ['firstname' => 'Admin', 'email' => 'admin@mail.com', 'password' => '$2y$10$f6OlWC5WxFZx1lt3bs3RR.OVnXqUKHBm300DruB07P43jSDRQPVlW']
+        ]);
     }
 
     /**

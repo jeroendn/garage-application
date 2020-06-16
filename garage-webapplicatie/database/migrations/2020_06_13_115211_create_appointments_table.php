@@ -21,7 +21,7 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('option_id')->references('id')->on('appointment_options');
             $table->mediumText('comment')->default('');
             $table->string('licence_plate');
-            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('status_id')->default(1);
             $table->foreign('status_id')->references('id')->on('appointment_status');
             $table->double('hours')->default(0);
             $table->double('total_price')->default(0);

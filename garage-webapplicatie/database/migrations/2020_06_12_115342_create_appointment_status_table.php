@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateAppointmentStatusTable extends Migration
@@ -18,6 +19,15 @@ class CreateAppointmentStatusTable extends Migration
             $table->string('status')->unique();
             $table->timestamps();
         });
+
+        DB::table('appointment_status')->insert([
+            ['status' => 'Ingediend'],
+            ['status' => 'Ingeroosterd'],
+            ['status' => 'In behandeling'],
+            ['status' => 'Gereed'],
+            ['status' => 'Betaald'],
+            ['status' => 'Afgerond']
+        ]);
     }
 
     /**
