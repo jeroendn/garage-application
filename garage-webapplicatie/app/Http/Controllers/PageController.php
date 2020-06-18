@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -14,7 +15,9 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        return view('pages.dashboard');
+        $appointments = \App\Appointment::where('user_id', Auth::user()->id)->get();
+
+        return view('pages.dashboard', compact('appointments'));
     }
 
     public function appointment()

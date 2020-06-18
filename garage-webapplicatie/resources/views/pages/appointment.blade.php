@@ -4,7 +4,7 @@
 
 @section('content')
 
-  <div class="">
+  <div>
     <form method="POST" action="{{ action('PostController@makeAppointment') }}">
       @csrf
 

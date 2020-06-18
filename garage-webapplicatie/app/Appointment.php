@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-
+    public function status() {
+        return $this->belongsTo('App\AppointmentStatus');
+    }
 }

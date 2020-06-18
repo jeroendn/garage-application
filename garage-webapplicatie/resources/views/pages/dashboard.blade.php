@@ -4,8 +4,13 @@
 
 @section('content')
 
-  <h1>Dashboard page title</h1>
-
-  <p>Dashboard informatie.</p>
+@forelse($appointments as $appointment)
+  <div>
+    <p>{{ $appointment->status_id }}</p>
+    <p>{{ $appointment->status->status }}</p>
+  </div>
+@empty
+  <div><h2>U heeft nog geen afspraken gemaakt.</h2></div>
+@endforelse
 
 @endsection
