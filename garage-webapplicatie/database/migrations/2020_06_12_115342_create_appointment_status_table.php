@@ -24,7 +24,7 @@ class CreateAppointmentStatusTable extends Migration
             ['status' => 'Ingediend'],
             ['status' => 'Ingeroosterd'],
             ['status' => 'In behandeling'],
-            ['status' => 'Gereed'],
+            ['status' => 'Wachtend op betaling'],
             ['status' => 'Betaald'],
             ['status' => 'Afgerond']
         ]);

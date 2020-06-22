@@ -9,4 +9,8 @@ class Appointment extends Model
     public function status() {
         return $this->belongsTo('App\AppointmentStatus');
     }
+
+    public function option() {
+        return $this->belongsTo('App\AppointmentOptions');
+    }
 }
