@@ -14,9 +14,24 @@
         </div>
       @endif
 
+      {{--   options   --}}
+      <div class="form-group row">
+        <label for="option" class="col-md-4 col-form-label text-md-right">{{ __('Kies uw afspraak') }}</label>
+
+        <div class="col-md-6">
+          <select id="option" name="option" class="form-control">
+            @forelse($appointmentOptions as $option)
+              <option value="{{ $option->id }}">{{ $option->option }}</option>
+            @empty
+              <option value="" disabled>No options available</option>
+            @endforelse
+          </select>
+        </div>
+      </div>
+
       {{--   datepicker   --}}
       <div class="form-group row">
-        <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Kies een datum') }}</label>
+        <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Kies een beschikbare datum') }}</label>
 
         <div class="col-md-6">
           <input type="text" id="date" name="date" autocomplete="off" class="form-control" required>
@@ -53,21 +68,6 @@
           beforeShowDay: DisableDates
         });
       </script>
-
-      {{--   options   --}}
-      <div class="form-group row">
-        <label for="option" class="col-md-4 col-form-label text-md-right">{{ __('Kies uw afspraak') }}</label>
-
-        <div class="col-md-6">
-          <select id="option" name="option" class="form-control">
-            @forelse($appointmentOptions as $option)
-              <option value="{{ $option->id }}">{{ $option->option }}</option>
-            @empty
-              <option value="" disabled>No options available</option>
-            @endforelse
-          </select>
-        </div>
-      </div>
 
       {{--   comment   --}}
       <div class="form-group row">

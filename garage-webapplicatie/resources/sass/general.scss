@@ -148,3 +148,15 @@ html {
     }
   }
 }
+
+.invoice {
+  .invoice-top {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    table:last-of-type {
+      text-align: right;
+    }
+  }
+}

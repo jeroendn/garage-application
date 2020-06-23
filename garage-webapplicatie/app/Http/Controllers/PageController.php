@@ -15,7 +15,7 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        $appointments = \App\Appointment::where('user_id', Auth::user()->id)->get();
+        $appointments = \App\Appointment::orderBy('created_at', 'desc')->where('user_id', Auth::user()->id)->get();
 
         return view('pages.dashboard', compact('appointments'));
     }
@@ -32,7 +32,9 @@ class PageController extends Controller
 
     public function invoice()
     {
-        return view('pages.invoice');
+        $appointment = \App\Appointment::where('id', request('appointment_id'))->first();
+
+        return view('pages.invoice', compact('appointment'));
     }
 
 }

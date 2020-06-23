@@ -13,4 +13,8 @@ class Appointment extends Model
     public function option() {
         return $this->belongsTo('App\AppointmentOptions');
     }
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }

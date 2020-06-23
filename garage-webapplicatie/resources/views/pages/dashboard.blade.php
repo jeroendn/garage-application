@@ -5,7 +5,7 @@
 @section('content')
 
   <div class="appointment-row font-weight-bold">
-    <p>Soort afspraak</p>
+    <p>Service</p>
     <p>Toelichting</p>
     <p>Kenteken</p>
     <p>Gepland op</p>
@@ -22,7 +22,8 @@
     <p>{{ date('d M yy', strtotime($appointment->created_at)) }}</p>
     <p class="status" status="{{ $appointment->status->id }}">{{ $appointment->status->status }}</p>
     @if($appointment->status->id >= 4)
-      <a href="{{action('PostController@downloadPDF', $appointment->id)}}">factuur</a>
+{{--      <a href="--}}{{-- {{action('PostController@downloadPDF', $appointment->id)}} --}}{{--">Factuur</a>--}}
+      <form method="POST" action="{{ action('PageController@invoice') }}">@csrf<input type="hidden" name="appointment_id" value="{{ $appointment->id }}"><button type="submit" class="btn btn-primary">Factuur</button></form>
     @else
       <a href="#!"></a>
     @endif

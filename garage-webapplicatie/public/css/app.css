@@ -11077,3 +11077,13 @@ html body footer a:hover {
   background-color: #00bb0055;
 }
 
+.invoice .invoice-top {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.invoice .invoice-top table:last-of-type {
+  text-align: right;
+}
+
