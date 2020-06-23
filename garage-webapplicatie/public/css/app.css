@@ -11042,21 +11042,22 @@ html body footer a:hover {
 
 .appointment-row > * {
   margin-bottom: 0;
-  max-width: 150px;
+  max-width: 155px;
   overflow: auto;
   white-space: nowrap;
 }
 
 .appointment-row > *:not(:last-child) {
   margin-right: 10px;
-  width: 150px;
-  min-width: 150px;
+  width: 155px;
+  min-width: 155px;
 }
 
 .appointment-row > *.status {
   margin-top: -10px;
   margin-bottom: -10px;
   padding-top: 10px;
+  padding-right: 5px;
   padding-left: 5px;
   color: #000;
 }

@@ -22,7 +22,7 @@
     <p>{{ date('d M yy', strtotime($appointment->created_at)) }}</p>
     <p class="status" status="{{ $appointment->status->id }}">{{ $appointment->status->status }}</p>
     @if($appointment->status->id >= 4)
-      <a href="#!">Factuur</a>
+      <a href="{{action('PostController@downloadPDF', $appointment->id)}}">factuur</a>
     @else
       <a href="#!"></a>
     @endif

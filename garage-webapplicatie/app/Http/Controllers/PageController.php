@@ -30,4 +30,9 @@ class PageController extends Controller
         return view('pages.appointment', compact('appointments', 'appointmentOptions'));
     }
 
+    public function invoice()
+    {
+        return view('pages.invoice');
+    }
+
 }
