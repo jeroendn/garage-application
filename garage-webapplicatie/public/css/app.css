@@ -11087,3 +11087,7 @@ html body footer a:hover {
   text-align: right;
 }
 
+.invoice tfoot {
+  border-top: 2px solid #dee2e6;
+}
+

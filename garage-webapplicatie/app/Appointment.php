@@ -17,4 +17,8 @@ class Appointment extends Model
     public function user() {
         return $this->belongsTo('App\User');
     }
+
+    public function parts() {
+        return $this->belongsToMany('App\Part')->withPivot('amount', 'price_per_piece');
+    }
 }

@@ -54,6 +54,57 @@
       </table>
     </div>
 
+    <table class="table mt-4">
+      <thead>
+      <tr>
+        <th>Product</th>
+        <th>Prijs</th>
+        <th>Qty</th>
+        <th>Totaal</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{ $appointment->option->option }}</td>
+        <td>&#8364;{{ $appointment->option->price_per_hour }} per uur</td>
+        <td>{{ $appointment->hours }} uur</td>
+        <td>&#8364;{{ number_format($appointment->option->price_per_hour * $appointment->hours, 2) }}</td>
+      </tr>
+      @forelse($appointment->parts as $part)
+        <tr>
+          <td>{{ $part->name }}</td>
+          <td>&#8364;{{ $part->pivot->price_per_piece }} p.st.</td>
+          <td>{{ $part->pivot->amount }}</td>
+          <td>&#8364;{{ number_format($part->pivot->amount * $part->pivot->price_per_piece, 2) }}</td>
+        </tr>
+      @empty
+        <tr>
+          <td></td>
+        </tr>
+      @endforelse
+      </tbody>
+      <tfoot>
+      <tr>
+        <td>Subtotaal exc. BTW:</td>
+        <td></td>
+        <td></td>
+        <td>&#8364;{{ number_format($appointment->total_price / 121 * 100, 2) }}</td>
+      </tr>
+      <tr>
+        <td>BTW:</td>
+        <td></td>
+        <td>21%</td>
+        <td>&#8364;{{ number_format($appointment->total_price / 121 * 21, 2) }}</td>
+      </tr>
+      <tr>
+        <th>Totaalbedrag:</th>
+        <th></th>
+        <th></th>
+        <th>&#8364;{{ number_format($appointment->total_price, 2) }}</th>
+      </tr>
+      </tfoot>
+    </table>
+
   </div>
 
 @endsection
