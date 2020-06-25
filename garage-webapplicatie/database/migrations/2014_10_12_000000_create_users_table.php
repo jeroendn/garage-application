@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
@@ -21,11 +22,15 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('street');
-            $table->integer('street_number');
-            $table->string('zip');
+            $table->string('street')->default('');
+            $table->integer('street_number')->default(0);
+            $table->string('zip')->default('');
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            ['firstname' => 'Admin', 'email' => 'admin@mail.com', 'password' => '$2y$10$f6OlWC5WxFZx1lt3bs3RR.OVnXqUKHBm300DruB07P43jSDRQPVlW']
+        ]);
     }
 
     /**

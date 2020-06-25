@@ -10985,6 +10985,19 @@ html body .page-title-wrapper .page-title {
   display: flex;
   justify-content: center;
   flex-flow: column;
+  position: relative;
+}
+
+html body .page-title-wrapper .page-title a {
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  font-size: 15px;
+  color: #212529;
+}
+
+html body .page-title-wrapper .page-title a:hover {
+  text-decoration: none;
 }
 
 html body main {
@@ -11026,5 +11039,68 @@ html body footer a:hover {
   height: calc(100% - 30px);
   width: 1px;
   background: rgba(0, 0, 0, 0.125);
+}
+
+.alert {
+  text-align: center;
+}
+
+.appointment-row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-flow: row wrap;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.appointment-row > * {
+  margin-bottom: 0;
+  max-width: 155px;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.appointment-row > *:not(:last-child) {
+  margin-right: 10px;
+  width: 155px;
+  min-width: 155px;
+}
+
+.appointment-row > *.status {
+  margin-top: -10px;
+  margin-bottom: -10px;
+  padding-top: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  color: #000;
+}
+
+.appointment-row > *.status[status="1"],
+.appointment-row > *.status[status="2"] {
+  background-color: #bb000055;
+}
+
+.appointment-row > *.status[status="3"],
+.appointment-row > *.status[status="4"] {
+  background-color: #ffaa0055;
+}
+
+.appointment-row > *.status[status="5"],
+.appointment-row > *.status[status="6"] {
+  background-color: #00bb0055;
+}
+
+.invoice .invoice-top {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.invoice .invoice-top table:last-of-type {
+  text-align: right;
+}
+
+.invoice tfoot {
+  border-top: 2px solid #dee2e6;
 }
 
