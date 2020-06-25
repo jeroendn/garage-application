@@ -10985,6 +10985,19 @@ html body .page-title-wrapper .page-title {
   display: flex;
   justify-content: center;
   flex-flow: column;
+  position: relative;
+}
+
+html body .page-title-wrapper .page-title a {
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+  font-size: 15px;
+  color: #212529;
+}
+
+html body .page-title-wrapper .page-title a:hover {
+  text-decoration: none;
 }
 
 html body main {

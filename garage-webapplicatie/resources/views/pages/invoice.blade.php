@@ -105,6 +105,8 @@
       </tfoot>
     </table>
 
+    <a href="download-invoice/{{ $appointment->id }}" target="_blank" class="btn btn-primary">Download</a>
+
   </div>
 
 @endsection

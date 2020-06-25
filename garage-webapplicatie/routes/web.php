@@ -23,5 +23,5 @@ Route::get('/afspraak-maken', 'PageController@appointment')->middleware('auth');
 Route::post('/factuur', 'PageController@invoice')->middleware('auth');
 
 Route::post('/make-appointment', 'PostController@makeAppointment');
-//Route::get('/downloadPDF/{id}', 'PostController@downloadPDF');
+Route::get('/download-invoice/{id}', 'PostController@downloadInvoice');
 

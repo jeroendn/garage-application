@@ -57,6 +57,19 @@ html {
         display: flex;
         justify-content: center;
         flex-flow: column;
+        position: relative;
+
+        a {
+          position: absolute;
+          left: 15px;
+          bottom: 10px;
+          font-size: 15px;
+          color: #212529;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
       }
     }
 
@@ -162,5 +175,9 @@ html {
 
   tfoot {
     border-top: 2px solid #dee2e6;
+  }
+
+  > a {
+
   }
 }

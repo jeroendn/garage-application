@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
-//use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use Egulias\EmailValidator\Exception\AtextAfterCFWS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,11 +33,11 @@ class PostController extends Controller
         return redirect()->back()->with('message', 'Afspraak is succesvol geplanned.');
     }
 
-//    public function downloadPDF($id) {
-//        $appointment = Appointment::find($id);
-//        $pdf = (new \Barryvdh\DomPDF\PDF)->loadView('pdf.invoice', compact('appointment'));
-//
-//        return $pdf->download('invoice.pdf');
-//    }
+    public function downloadInvoice($id) {
+        $appointment = Appointment::find($id);
+        $pdf = PDF::loadView('pages.invoice-download', compact('appointment'));
+
+        return $pdf->download('invoice_' . $appointment->id . '.pdf');
+    }
 
 }
