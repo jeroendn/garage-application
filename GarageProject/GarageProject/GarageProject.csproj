@@ -128,17 +128,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBConnect.cs" />
+    <Compile Include="Eigenaar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Eigenaar.Designer.cs">
+      <DependentUpon>Eigenaar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Monteur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Monteur.Designer.cs">
+      <DependentUpon>Monteur.cs</DependentUpon>
+    </Compile>
     <Compile Include="PasswordHash.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receptionist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist.Designer.cs">
+      <DependentUpon>Receptionist.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Monteur.resx">
+      <DependentUpon>Monteur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -149,6 +170,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Receptionist.resx">
+      <DependentUpon>Receptionist.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

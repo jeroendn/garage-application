@@ -18,7 +18,6 @@ D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\bin\Debu
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\bin\Debug\Microsoft.Extensions.Logging.dll
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\bin\Debug\Microsoft.Extensions.Options.dll
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\bin\Debug\Microsoft.Extensions.Primitives.dll
-D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\bin\Debug\MySql.Data.dll
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\bin\Debug\System.Buffers.dll
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\bin\Debug\System.Collections.Immutable.dll
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\bin\Debug\System.ComponentModel.Annotations.dll
@@ -62,3 +61,4 @@ D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debu
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.csproj.CopyComplete
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.exe
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.pdb
+D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.Receptionist.resources
