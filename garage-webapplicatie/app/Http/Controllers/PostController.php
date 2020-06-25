@@ -27,8 +27,6 @@ class PostController extends Controller
         $appointment->setCreatedAt(request('date'));
         $appointment->save();
 
-        // dd($appointment);
-
         return redirect()->back()->with('message', 'Afspraak is succesvol geplanned.');
     }
 

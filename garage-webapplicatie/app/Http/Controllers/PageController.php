@@ -27,21 +27,22 @@ class PageController extends Controller
         $appointments = \App\Appointment::all();
         $appointmentOptions = \App\AppointmentOptions::all();
 
-        // dd($appointmentOptions);
-
         return view('pages.appointment', compact('appointments', 'appointmentOptions'));
     }
 
-    public function downloadInvoice($id) {
+    public function downloadInvoice($id)
+    {
         $appointment = Appointment::find($id);
         $pdf = PDF::loadView('pages.invoice-download', compact('appointment'));
 
         return $pdf->download('Factuur_GarageOchten_' . $appointment->id . '.pdf');
     }
 
-    public function payment()
+    public function payment($id)
     {
-        return view('pages.payment');
+        $appointment = Appointment::find($id);
+
+        return view('pages.payment', compact('appointment'));
     }
 
 }

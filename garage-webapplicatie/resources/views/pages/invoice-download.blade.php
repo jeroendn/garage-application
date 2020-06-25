@@ -1,8 +1,8 @@
 <div class="invoice">
   <h2>Factuur #{{ $appointment->id }}</h2>
 
-  <div class="invoice-top">
-    <table>
+  <div class="invoice-top row">
+    <table class="col">
       <tbody>
       <tr>
         <td>Naam:</td>
@@ -27,7 +27,7 @@
       </tbody>
     </table>
 
-    <table>
+    <table class="col">
       <tbody>
       <tr>
         <td>{{ env('APP_NAME') }}</td>

@@ -26,8 +26,8 @@
     @else
       <a href="#!"></a>
     @endif
-    @if($appointment->status->id < 5)
-      <a href="/betaal">Betaal</a>
+    @if($appointment->status->id == 4)
+      <a href="betaal/{{ $appointment->id }}" class="btn btn-primary">Betalen</a>
     @else
       <a href="#!"></a>
     @endif
