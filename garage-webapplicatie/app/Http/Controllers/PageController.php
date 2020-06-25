@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,7 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        $appointments = \App\Appointment::orderBy('created_at', 'desc')->where('user_id', Auth::user()->id)->get();
+        $appointments = \App\Appointment::orderBy('created_at', 'asc')->where('user_id', Auth::user()->id)->get();
 
         return view('pages.dashboard', compact('appointments'));
     }
@@ -30,11 +32,16 @@ class PageController extends Controller
         return view('pages.appointment', compact('appointments', 'appointmentOptions'));
     }
 
-    public function invoice()
-    {
-        $appointment = \App\Appointment::where('id', request('appointment_id'))->first();
+    public function downloadInvoice($id) {
+        $appointment = Appointment::find($id);
+        $pdf = PDF::loadView('pages.invoice-download', compact('appointment'));
 
-        return view('pages.invoice', compact('appointment'));
+        return $pdf->download('Factuur_GarageOchten_' . $appointment->id . '.pdf');
+    }
+
+    public function payment()
+    {
+        return view('pages.payment');
     }
 
 }

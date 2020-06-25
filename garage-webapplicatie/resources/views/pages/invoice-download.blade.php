@@ -1,5 +1,5 @@
 <div class="invoice">
-  <h2>Invoice #{{ $appointment->id }}</h2>
+  <h2>Factuur #{{ $appointment->id }}</h2>
 
   <div class="invoice-top">
     <table>
