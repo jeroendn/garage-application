@@ -32,7 +32,7 @@ class PostController extends Controller
 
     public function invoice()
     {
-        $appointment = \App\Appointment::where('id', request('appointment_id'))->first();
+        $appointment = Appointment::where('id', request('appointment_id'))->first();
 
         return view('pages.invoice', compact('appointment'));
     }

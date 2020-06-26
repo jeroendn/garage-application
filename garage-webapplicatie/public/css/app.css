@@ -11001,7 +11001,7 @@ html body .page-title-wrapper .page-title a:hover {
 }
 
 html body main {
-  min-height: 90vh;
+  min-height: 50vh;
 }
 
 html body footer {
