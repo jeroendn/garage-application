@@ -27,7 +27,7 @@ class PostController extends Controller
         $appointment->setCreatedAt(request('date'));
         $appointment->save();
 
-        return redirect()->back()->with('message', 'Afspraak is succesvol geplanned.');
+        return redirect()->back()->with('message', 'Afspraak is succesvol geplanned!');
     }
 
     public function invoice()
@@ -35,6 +35,18 @@ class PostController extends Controller
         $appointment = \App\Appointment::where('id', request('appointment_id'))->first();
 
         return view('pages.invoice', compact('appointment'));
+    }
+
+
+    public function payment(Request $request)
+    {
+        $request->validate([
+            'appointment_id' => 'required',
+        ]);
+
+        Appointment::find(1)->update(['status_id' => 5]);
+
+        return redirect()->back()->with('message', 'Betaling is succesvol!');
     }
 
 }

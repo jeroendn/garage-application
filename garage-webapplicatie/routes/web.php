@@ -25,5 +25,6 @@ Route::get('/betaal/{id}', 'PageController@payment')->middleware('auth');
 
 Route::post('/make-appointment', 'PostController@makeAppointment');
 Route::post('/factuur', 'PostController@invoice');
+Route::post('/payment', 'PostController@payment');
 
 
