@@ -2,9 +2,9 @@
   <nav class="container navbar">
 
     <ul>
-      <li><a href="/home">Home</a></li>
-      <li><a href="/dashboard">Dashboard</a></li>
-      <li><a href="/afspraak-maken">Afspraak</a></li>
+      <li><a href="{{ action('PageController@home') }}">Home</a></li>
+      <li><a href="{{ action('PageController@dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ action('PageController@appointment') }}">Afspraak</a></li>
     </ul>
 
     <ul>

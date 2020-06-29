@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
+use App\AppointmentOptions;
 use App\Review;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
