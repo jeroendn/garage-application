@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
+use App\Review;
 use Egulias\EmailValidator\Exception\AtextAfterCFWS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,23 @@ class PostController extends Controller
         Appointment::find(1)->update(['status_id' => 5]);
 
         return redirect()->back()->with('message', 'Betaling is succesvol!');
+    }
+
+    public function postReview(Request $request)
+    {
+        $request->validate([
+            'rating' => 'required',
+            'review' => 'required'
+        ]);
+
+        $review = new Review();
+
+        $review->user_id = Auth::id();
+        $review->rating = request('rating');
+        $review->review = request('review');
+        $review->save();
+
+        return redirect()->back()->with('message', 'Uw review is geplaatst!');
     }
 
 }

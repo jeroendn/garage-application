@@ -15,7 +15,17 @@ class PageController extends Controller
     {
         $reviews = Review::orderBy('created_at', 'desc')->get();
 
-        return view('pages.home', compact('reviews'));
+        $count = 0;
+        $ratingsSum = 0;
+
+        foreach ($reviews as $review) {
+            $ratingsSum += $review->rating;
+            $count++;
+        }
+
+        $averageRating = Round($ratingsSum / $count, 1);
+
+        return view('pages.home', compact('reviews', 'averageRating'));
     }
 
     public function dashboard()

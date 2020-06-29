@@ -11104,3 +11104,16 @@ html body footer a:hover {
   border-top: 2px solid #dee2e6;
 }
 
+.banner {
+  max-height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.banner img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
