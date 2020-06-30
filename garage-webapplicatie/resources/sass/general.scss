@@ -130,8 +130,6 @@ html {
   > * {
     margin-bottom: 0;
     max-width: 155px;
-    overflow: auto;
-    white-space: nowrap;
 
     &:not(:last-child) {
       margin-right: 10px;
@@ -160,6 +158,10 @@ html {
       }
     }
   }
+
+  > a {
+    height: fit-content;
+  }
 }
 
 .invoice {
@@ -175,6 +177,11 @@ html {
 
   tfoot {
     border-top: 2px solid #dee2e6;
+  }
+
+  a:not(.btn) {
+    text-decoration: none;
+    color: unset;
   }
 }
 

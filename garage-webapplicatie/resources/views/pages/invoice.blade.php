@@ -45,10 +45,10 @@
           <td>5678YT Ochten</td>
         </tr>
         <tr>
-          <td>+06 12345678</td>
+          <td><a href="tel:0612345678">+06 12345678</a></td>
         </tr>
         <tr>
-          <td>info@garageochten.nl</td>
+          <td><a href="mailto:info@garageochten.nl">info@garageochten.nl</a></td>
         </tr>
         </tbody>
       </table>
