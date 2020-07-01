@@ -14,13 +14,9 @@ namespace GarageProject
 {
     public partial class Receptionist : Form
     {
-        private MySqlConnection connection;
-        private string server;
-        private string database;
-        private string uid;
-        private string password;
-        private List<string>[] myList;
+
         private string dgselectedid;
+        DBConnect myDBConnect = new DBConnect();
 
         public Receptionist()
         {
@@ -35,7 +31,7 @@ namespace GarageProject
         private void BindGrid()
         {
             DBConnect myDBConnect = new DBConnect();
-            List<string>[] myList = myDBConnect.GetAppointments(string.Empty);
+            List<string>[] myList = myDBConnect.GetAppointments(string.Empty, string.Empty);
             dgAgenda.Rows.Clear();
             for (int i = 0; i < myList[0].Count; i++)
             {
@@ -59,28 +55,21 @@ namespace GarageProject
             this.BindGrid();
             dtpPlanningDag.Format = DateTimePickerFormat.Custom;
             dtpPlanningDag.CustomFormat = "dd-MM-yyyy";
-            DBConnect myDBConnect1 = new DBConnect();
-            List<string>[] myList = myDBConnect1.GetEmployees();
+            List<string>[] myList = myDBConnect.GetEmployees();
             for (int i = 0; i < myList[0].Count; i++)
             {
                 {
                     if (myList[0][i].ToString() != "")
                     {
-                        string[] row1 = new string[] { myList[0][i].ToString() };
-                        string[] row2 = new string[] { myList[1][i].ToString() };
-                        string[] row3 = new string[] { myList[2][i].ToString() };
-                        string[] row4 = new string[] { myList[3][i].ToString() };
-                        ComboboxItem item = new ComboboxItem();
-                        item.Text = row2[0] + " " + row3[0];
-                        item.Value = row1;
-                        cboMonteur.Items.Add(item);
+                        string[] col1 = new string[] { myList[1][i].ToString() };
+                        string[] col2 = new string[] { myList[2][i].ToString() };
+                        cboMonteur.Items.Add(col1[0] + " " + col2[0]);
                         ;
                     }
                 }
             }
 
-            DBConnect myDBConnect2 = new DBConnect();
-            List<string>[] myList1 = myDBConnect2.GetStatus();
+            List<string>[] myList1 = myDBConnect.ReturnList("SELECT status FROM appointment_status order by status asc", "status");
             for (int i = 0; i < myList1[0].Count; i++)
             {
                 {
@@ -104,8 +93,7 @@ namespace GarageProject
             string sMaand = dtpPlanningDag.Text.Substring(3, 2);
             string sJaar = dtpPlanningDag.Text.Substring(6, 4);
             string sTotDatum = sJaar + "-" + sMaand + "-" + sDag;
-            DBConnect myDBConnect = new DBConnect();
-            List<string>[] myList = myDBConnect.GetAppointments(sTotDatum);
+            List<string>[] myList = myDBConnect.GetAppointments(sTotDatum, string.Empty);
             dgAgenda.Rows.Clear();
             for (int i = 0; i < myList[0].Count; i++)
             {
@@ -113,7 +101,7 @@ namespace GarageProject
 
                     if (myList[0][i].ToString() != "")
                     {
-                        string[] row1 = new string[] { myList[0][i].ToString(), myList[1][i].ToString(), myList[2][i].ToString(), myList[3][i].ToString(), myList[4][i].ToString(), myList[5][i].ToString(), myList[6][i].ToString(), myList[7][i].ToString(), myList[8][i].ToString(), myList[9][i].ToString() };
+                        string[] row1 = new string[] { myList[0][i].ToString(), myList[1][i].ToString(), myList[2][i].ToString(), myList[3][i].ToString(), myList[4][i].ToString(), myList[5][i].ToString(), myList[6][i].ToString(), myList[7][i].ToString(), myList[8][i].ToString()};
 
                         dgAgenda.Rows.Add(row1);
                     }
@@ -134,37 +122,22 @@ namespace GarageProject
             int rowIndex = e.RowIndex;
             //Collectie van eigenschappen van de geselecteerde rij
 
-            DataGridViewRow row = dgAgenda.Rows[rowIndex];
+            DataGridViewRow row = dgAgenda.Rows[rowIndex];          
             cboStatus.Text = row.Cells[6].Value.ToString();
             cboMonteur.Text = row.Cells[7].Value.ToString() + " " + row.Cells[8].Value.ToString();
             tbxOpmerking.Text = row.Cells[1].Value.ToString();
             dgselectedid = row.Cells[0].Value.ToString();
 
         }
-        public class ComboboxItem
-        {
-            public string Text { get; set; }
-            public object Value { get; set; }
-            public override string ToString()
-            {
-                return Text;
-            }
-        }
 
         private void btnOpslaan_Click(object sender, EventArgs e)
         {
-            // MessageBox.Show(cboMonteur.SelectedValue.ToString());
-            //cboMonteur.SelectedIndex = 0;
-            //MessageBox.Show(cboMonteur.SelectedItem.ToString());
             if (dgselectedid != "")
             {
-                int dgId = Convert.ToInt32(dgselectedid);
-                DBConnect myDBConnect2 = new DBConnect();
-                myDBConnect2.UpdateReceptionist(cboStatus.SelectedItem.ToString(), cboMonteur.SelectedItem.ToString(), tbxOpmerking.Text, Convert.ToInt32(dgselectedid));
+                myDBConnect.UpdateStatusMonteurOpmerking(cboStatus.SelectedItem.ToString(), cboMonteur.SelectedItem.ToString(), tbxOpmerking.Text, Convert.ToInt32(dgselectedid));
                 BindGrid();
             }
 
-            // MessageBox.Show(cboMonteur.SelectedIndex.ToString());
 
         }
     }

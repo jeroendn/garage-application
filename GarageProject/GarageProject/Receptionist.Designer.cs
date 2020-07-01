@@ -66,6 +66,7 @@
             this.lastname});
             this.dgAgenda.Location = new System.Drawing.Point(22, 75);
             this.dgAgenda.Name = "dgAgenda";
+            this.dgAgenda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgAgenda.Size = new System.Drawing.Size(1058, 359);
             this.dgAgenda.TabIndex = 0;
             this.dgAgenda.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAgenda_CellDoubleClick);

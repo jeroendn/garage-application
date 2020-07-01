@@ -24,7 +24,7 @@ namespace GarageProject
 
 
         //Initialize values
-        private void Initialize()
+        public void Initialize()
         {
             //ok
             //server = "192.67.198.61";
@@ -42,7 +42,7 @@ namespace GarageProject
         }
 
         //open connection to database
-        private bool OpenConnection()
+        public bool OpenConnection()
         {
             try
             {
@@ -71,7 +71,7 @@ namespace GarageProject
         }
 
         //Close connection
-        private bool CloseConnection()
+        public bool CloseConnection()
         {
             try
             {
@@ -87,49 +87,11 @@ namespace GarageProject
 
 
         //Select statement
-        public List<string>[] SelectPartijen()
-        {
-            string query = "SELECT naam FROM Partijen";
-
-            //Create a list to store the result
-            List<string>[] list = new List<string>[1];
-            list[0] = new List<string>();
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                //Read the data and store them in the list
-                while (dataReader.Read())
-                {
-                    list[0].Add(dataReader["naam"] + "");
-                }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-
-                //return list to be displayed
-                return list;
-            }
-            else
-            {
-                return list;
-            }
-        }
-
-        //Select statement
         public List<string>[] LoginPerson(string Email, string Wachtwoord)
         {
             string query = "SELECT A1.email, A1.password, A2.role FROM employees A1 left outer join employee_roles A2 on (A1.role_id = A2.id) " +
                "where A1.email = '" + Email + "'";
-            
+
 
             //Create a list to store the result
             List<string>[] list = new List<string>[3];
@@ -172,7 +134,7 @@ namespace GarageProject
 
         public List<string>[] GetEmployees()
         {
-            string query = "SELECT employees.id, employees.firstname, employees.lastname, employee_roles.role FROM employees " + 
+            string query = "SELECT employees.id, employees.firstname, employees.lastname, employee_roles.role FROM employees " +
                            "Left Join employee_roles on (employees.role_id = employee_roles.id) where employee_roles.role = 'monteur'";
 
             //Create a list to store the result
@@ -215,26 +177,40 @@ namespace GarageProject
             }
         }
 
-        public List<string>[] GetAppointments(string sDatum)
+        public List<string>[] GetAppointments(string sDatum, string sMonth)
         {
-            string query = string.Empty;
-            string dt = sDatum.ToString();
+            //Geeft een lijst terug met een koppeling naar de appointment_status tabel en naar de employees tabel.
+            //Het moet een left join zijn, omdat we alle appointments willen zien en anders de lijst ingekort wordt bij een inner join
 
-            
-            if (sDatum == string.Empty)
+            string query = string.Empty;
+
+
+            if (sDatum == string.Empty && sMonth == string.Empty)
             {
-                 query = "SELECT appointments.*, appointment_status.status, employees.firstname, employees.lastname FROM appointments " +
-                         "Left Join appointment_status ON(appointments.status_id = appointment_status.id) " + 
-                         "Left Join employees ON(appointments.mechanic_id = employees.id) order by created_at desc";
+                //Alle appointments weergeven
+                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, appointments.created_at, " +
+                        "appointment_status.status, employees.firstname, employees.lastname FROM appointments " +
+                        "Left Join appointment_status ON(appointments.status_id = appointment_status.id) " +
+                        "Left Join employees ON(appointments.mechanic_id = employees.id) order by appointments.created_at desc";
             }
-            else
+            else if (sDatum != string.Empty && sMonth == string.Empty)
             {
-                query = "SELECT appointments.*, appointment_status.status, employees.firstname, employees.lastname FROM appointments " +
+                //Zoeken op dag
+                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, appointments.created_at, " +
+                         "appointment_status.status, employees.firstname, employees.lastname FROM appointments " +
                          "Left Join appointment_status ON(appointments.status_id = appointment_status.id) " +
-                         "Left Join employees ON(appointments.mechanic_id = employees.id) where created_at = '" + sDatum + "' order by created_at desc";
+                         "Left Join employees ON(appointments.mechanic_id = employees.id) where appointments.created_at = '" + sDatum + "' order by appointments.created_at desc";
+            }
+            else if (sMonth != string.Empty) // Toon data voor de eigenaar
+            {
+                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, appointments.created_at, " +
+                        "appointment_status.status, employees.firstname, employees.lastname FROM appointments " +
+                        "Left Join appointment_status ON(appointments.status_id = appointment_status.id) " +
+                        "Left Join employees ON(appointments.mechanic_id = employees.id) where Month(appointments.created_at) = " + sMonth + 
+                        " and  Year(appointments.created_at) = " + DateTime.Now.Year + " order by appointments.created_at desc";
             }
             //Create a list to store the result
-            List<string>[] list = new List<string>[14];
+            List<string>[] list = new List<string>[9];
             list[0] = new List<string>();
             list[1] = new List<string>();
             list[2] = new List<string>();
@@ -244,11 +220,6 @@ namespace GarageProject
             list[6] = new List<string>();
             list[7] = new List<string>();
             list[8] = new List<string>();
-            list[9] = new List<string>();
-            list[10] = new List<string>();
-            list[11] = new List<string>();
-            list[12] = new List<string>();
-            list[13] = new List<string>();
 
 
             //Open connection
@@ -287,16 +258,75 @@ namespace GarageProject
                 return list;
             }
         }
-        public void UpdateReceptionist(string Status, string Monteur, string Opmerking, int id)
+        public List<string>[] GetParts(string AppointmentID)
         {
-            List<string>[] myList = GetStatusID(Status);
+            string query = string.Empty;
+
+
+                query = "SELECT appointment_part.part_id, parts.name, appointment_part.price_per_piece, amount FROM appointment_part left join parts on (appointment_part.part_id = parts.id) " + 
+                        "where appointment_part.appointment_id = '" + AppointmentID + "'";
+
+            //Create a list to store the result
+            List<string>[] list = new List<string>[4];
+            list[0] = new List<string>();
+            list[1] = new List<string>();
+            list[2] = new List<string>();
+            list[3] = new List<string>();
+
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    list[0].Add(dataReader["part_id"] + "");
+                    list[1].Add(dataReader["name"] + "");
+                    list[2].Add(dataReader["price_per_piece"] + "");
+                    list[3].Add(dataReader["amount"] + "");
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
+        public void UpdateStatusMonteurOpmerking(string Status, string Monteur, string Opmerking, int id)
+        {
+            string query = string.Empty;
+
+            
+            Opmerking = Opmerking.Replace("'", "''");
+            
+            List<string>[] myList = ReturnList("SELECT id FROM appointment_status where status = '" + Status + "' order by status asc", "id");
             string[] row1 = new string[] { myList[0][0].ToString() };
 
-            List<string>[] myList1 = GetMonteurID(Monteur);
+            List<string>[] myList1 = ReturnList("SELECT id FROM employees where (firstname + ' ' + lastname) = '" + Monteur + "'", "id");
             string[] row2 = new string[] { myList1[0][0].ToString() };
 
-            string query = "UPDATE appointments SET status_id = " + row1[0] + ", mechanic_id = '" + row2[0] + "', comment = '" + Opmerking + "' where id = " + id;
-
+            if (Monteur != string.Empty)
+            {
+                query = "UPDATE appointments SET status_id = " + row1[0] + ", mechanic_id = '" + row2[0] + "', comment = '" + Opmerking + "' where id = " + id;
+            }
+            else
+            {
+                query = "UPDATE appointments SET status_id = " + row1[0] + ", comment = '" + Opmerking + "' where id = " + id;
+            }
             //Open connection
             if (this.OpenConnection() == true)
             {
@@ -315,29 +345,49 @@ namespace GarageProject
             }
         }
 
-        public List<string>[] GetStatus()
+        public void ExecuteSQL(string SQL)
+        {
+            if (this.OpenConnection() == true)
+            {
+                //create mysql command
+                MySqlCommand cmd = new MySqlCommand();
+                //Assign the query using CommandText
+                cmd.CommandText = SQL;
+                //Assign the connection using Connection
+                cmd.Connection = connection;
+
+                //Execute query
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+
+        }
+
+        public List<string>[] GetPartsIDAndPrice(string PartsName)
         {
             string query = string.Empty;
 
 
-                query = "SELECT status FROM appointment_status order by status asc";
-
-            List<string>[] list = new List<string>[1];
+            List<string>[] list = new List<string>[2];
             list[0] = new List<string>();
+            list[1] = new List<string>();
 
 
             //Open connection
             if (this.OpenConnection() == true)
             {
                 //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand("select id, price from parts where name = '" + PartsName + "'", connection);
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["status"] + "");
+                    list[0].Add(dataReader["id"] + "");
+                    list[1].Add(dataReader["price"] + "");
                 }
 
                 //close Data Reader
@@ -354,12 +404,9 @@ namespace GarageProject
                 return list;
             }
         }
-        public List<string>[] GetStatusID(string Status)
+
+        public List<string>[] ReturnList(string SQL, string ReturnField)
         {
-            string query = string.Empty;
-
-
-            query = "SELECT id FROM appointment_status where status = '" + Status + "' order by status asc";
 
             List<string>[] list = new List<string>[1];
             list[0] = new List<string>();
@@ -369,14 +416,14 @@ namespace GarageProject
             if (this.OpenConnection() == true)
             {
                 //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(SQL, connection);
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["id"] + "");
+                    list[0].Add(dataReader[ReturnField] + "");
                 }
 
                 //close Data Reader
@@ -393,28 +440,28 @@ namespace GarageProject
                 return list;
             }
         }
-        public List<string>[] GetMonteurID(string Monteur)
+        public List<string>[] GetMonthlyRevenueAndHours(string SQL, string Omzet, string Uren)
         {
-            string query = string.Empty;
 
-            query = "SELECT id FROM employees where (firstname + ' ' + lastname) = '" + Monteur + "'";
 
-            List<string>[] list = new List<string>[1];
+            List<string>[] list = new List<string>[2];
             list[0] = new List<string>();
+            list[1] = new List<string>();
 
 
             //Open connection
             if (this.OpenConnection() == true)
             {
                 //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(SQL, connection);
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["id"] + "");
+                    list[0].Add(dataReader[Omzet] + "");
+                    list[1].Add(dataReader[Uren] + "");
                 }
 
                 //close Data Reader

@@ -19,7 +19,6 @@ namespace GarageProject
 
         private void btnInlog_Click(object sender, EventArgs e)
         {
-            string password = "wordpress";
             string hulpwoord = "ROCA12";
             //textBox1.Text = PWEncrypt;
             string PWEncrypt = PasswordHash.Encrypt(tbxWachtwoord.Text, hulpwoord);
@@ -82,7 +81,7 @@ namespace GarageProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            tbxEmail.Text = "jeroendenijs@garageochten.nl";
+            tbxEmail.Text = "hans.jaspers@garageochten.nl";
             tbxWachtwoord.Text = "wordpress";
         }
     }

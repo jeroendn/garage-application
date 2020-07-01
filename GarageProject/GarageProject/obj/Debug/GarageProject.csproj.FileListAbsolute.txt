@@ -62,3 +62,5 @@ D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debu
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.exe
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.pdb
 D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.Receptionist.resources
+D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.Monteur.resources
+D:\OneDrive - COG\Leerjaar 2\Garage-Project\GarageProject\GarageProject\obj\Debug\GarageProject.Eigenaar.resources
