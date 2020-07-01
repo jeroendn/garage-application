@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
-use Barryvdh\DomPDF\Facade as PDF;
+use App\Review;
 use Egulias\EmailValidator\Exception\AtextAfterCFWS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,16 +28,43 @@ class PostController extends Controller
         $appointment->setCreatedAt(request('date'));
         $appointment->save();
 
-        // dd($appointment);
-
-        return redirect()->back()->with('message', 'Afspraak is succesvol geplanned.');
+        return redirect()->back()->with('message', 'Afspraak is succesvol geplanned!');
     }
 
-    public function downloadInvoice($id) {
-        $appointment = Appointment::find($id);
-        $pdf = PDF::loadView('pages.invoice-download', compact('appointment'));
+    public function invoice()
+    {
+        $appointment = Appointment::where('id', request('appointment_id'))->first();
 
-        return $pdf->download('invoice_' . $appointment->id . '.pdf');
+        return view('pages.invoice', compact('appointment'));
+    }
+
+
+    public function payment(Request $request)
+    {
+        $request->validate([
+            'appointment_id' => 'required',
+        ]);
+
+        Appointment::find(1)->update(['status_id' => 5]);
+
+        return redirect()->back()->with('message', 'Betaling is succesvol!');
+    }
+
+    public function postReview(Request $request)
+    {
+        $request->validate([
+            'rating' => 'required',
+            'review' => 'required'
+        ]);
+
+        $review = new Review();
+
+        $review->user_id = Auth::id();
+        $review->rating = request('rating');
+        $review->review = request('review');
+        $review->save();
+
+        return redirect()->back()->with('message', 'Uw review is geplaatst!');
     }
 
 }

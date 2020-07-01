@@ -11001,7 +11001,7 @@ html body .page-title-wrapper .page-title a:hover {
 }
 
 html body main {
-  min-height: 90vh;
+  min-height: 50vh;
 }
 
 html body footer {
@@ -11056,8 +11056,6 @@ html body footer a:hover {
 .appointment-row > * {
   margin-bottom: 0;
   max-width: 155px;
-  overflow: auto;
-  white-space: nowrap;
 }
 
 .appointment-row > *:not(:last-child) {
@@ -11090,6 +11088,12 @@ html body footer a:hover {
   background-color: #00bb0055;
 }
 
+.appointment-row > a {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .invoice .invoice-top {
   display: flex;
   flex-flow: row wrap;
@@ -11102,5 +11106,23 @@ html body footer a:hover {
 
 .invoice tfoot {
   border-top: 2px solid #dee2e6;
+}
+
+.invoice a:not(.btn) {
+  text-decoration: none;
+  color: unset;
+}
+
+.banner {
+  max-height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.banner img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 

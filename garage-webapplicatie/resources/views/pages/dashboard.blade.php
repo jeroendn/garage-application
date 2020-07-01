@@ -22,12 +22,12 @@
     <p>{{ date('d M yy', strtotime($appointment->created_at)) }}</p>
     <p class="status" status="{{ $appointment->status->id }}">{{ $appointment->status->status }}</p>
     @if($appointment->status->id >= 4)
-      <form method="POST" action="{{ action('PageController@invoice') }}">@csrf<input type="hidden" name="appointment_id" value="{{ $appointment->id }}"><button type="submit" class="btn btn-primary">Factuur</button></form>
+      <form method="POST" action="{{ action('PostController@invoice') }}">@csrf<input type="hidden" name="appointment_id" value="{{ $appointment->id }}"><button type="submit" class="btn btn-primary">Factuur</button></form>
     @else
       <a href="#!"></a>
     @endif
-    @if($appointment->status->id < 5)
-      <a href="#!">Betaal</a>
+    @if($appointment->status->id == 4)
+      <a href="betaal/{{ $appointment->id }}" class="btn btn-primary">Betalen</a>
     @else
       <a href="#!"></a>
     @endif

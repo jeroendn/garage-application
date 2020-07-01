@@ -16,7 +16,7 @@ class CreateAppointmentPartTable extends Migration
         Schema::create('appointment_part', function (Blueprint $table) {
             $table->unsignedBigInteger('appointment_id');
             $table->foreign('appointment_id')->references('id')->on('appointments');
-            $table->unsignedBigInteger('part_id')->unique();
+            $table->unsignedBigInteger('part_id');
             $table->foreign('part_id')->references('id')->on('parts');
             $table->integer('amount')->default(1);
             $table->double('price_per_piece')->default(0);

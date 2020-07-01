@@ -40,4 +40,8 @@ class User extends Authenticatable
     public function option() {
         return $this->hasMany('App\Appointment');
     }
+
+    public function review() {
+        return $this->hasMany('App\Review');
+    }
 }

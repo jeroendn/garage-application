@@ -184,8 +184,56 @@
   </div>
   @endif
 
-  <div class="mt-5">
-    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.</p>
+  <div class="mt-5 mb-5">
+    <h2>Over ons</h2>
+    <p>Garage Ochten is gevestigd op de Ochtenseweg 9 in Ochten. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.</p>
+  </div>
+
+  <div class="mt-5 mb-5 banner container-full">
+    <img src="https://www.autolenders.nl/wp-content/uploads/2015/04/Auto-Lenders-Werkplaats-2.jpg">
+  </div>
+
+  <div class="review-wrapper">
+    @if(Auth::check())
+    <h2>Geef een review</h2>
+    <form method="POST" action="{{ action('PostController@postReview') }}" class="review-write mt-3 mb-5 d-block">
+
+      @if(session()->has('message'))
+        <div class="alert alert-success">
+          {{ session()->get('message') }}
+        </div>
+      @endif
+
+      @csrf
+      <select id="rating" name="rating" class="form-control mb-3">
+        <option value="5">5 Sterren</option>
+        <option value="4">4 Sterren</option>
+        <option value="3">3 Sterren</option>
+        <option value="2">2 Sterren</option>
+        <option value="1">1 Ster</option>
+      </select>
+      <textarea id="review" class="form-control mb-3" style="min-height: 150px;" placeholder="Schrijf over uw ervaring..." name="review"></textarea>
+      <button type="submit" class="btn btn-primary">{{ __('Plaats review') }}</button>
+    </form>
+    @endif
+
+    <h2>Reviews over Garage Ochten</h2>
+    <h4><i>Onze klanten beoordelen ons gemiddeld met een </i><strong>{{ $averageRating }} / 5</strong></h4>
+    @if(!Auth::check())
+      <p>Log in om een beoordeling te kunnen plaatsen.</p>
+    @endif
+    <div class="reviews">
+      @forelse($reviews as $review)
+        <div class="review card card-body mb-3">
+          <h5>{{ $review->user->firstname }} {{ $review->user->lastname }}</h5>
+          <h4>{{ $review->rating }} / 5</h4>
+          <p>{{ $review->review }}</p>
+          <span>Geplaatst op: {{ date('d M yy', strtotime($review->created_at)) }}</span>
+        </div>
+      @empty
+        {{ 'Geen reviews gevonden.' }}
+      @endforelse
+    </div>
   </div>
 
 @endsection
