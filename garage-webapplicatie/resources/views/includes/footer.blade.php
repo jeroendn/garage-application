@@ -28,7 +28,7 @@
           <li><a href="{{ action('PageController@home') }}">Home</a></li>
           <li><a href="{{ action('PageController@dashboard') }}">Dashboard</a></li>
           <li><a href="{{ action('PageController@appointment') }}">Afspraak maken</a></li>
-          <li><a href="/garageochten.exe" download>Download desktop applicatie</a></li>
+          <li><a href="garageochten.exe" download>Download desktop applicatie</a></li>
           <li><a href="https://jeroendn.nl" target="_blank">jeroendn.nl</a></li>
         </ul>
       </div>
