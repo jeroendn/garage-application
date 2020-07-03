@@ -15,7 +15,7 @@ namespace GarageProject
     {
 
         private string dgselectedid;
-
+        DBConnect myDBConnect = new DBConnect();
 
         public Monteur()
         {
@@ -27,7 +27,6 @@ namespace GarageProject
             this.BindGrid();
             dtpPlanningDag.Format = DateTimePickerFormat.Custom;
             dtpPlanningDag.CustomFormat = "dd-MM-yyyy";
-            DBConnect myDBConnect = new DBConnect();
             List<string>[] myList = myDBConnect.GetEmployees();
             for (int i = 0; i < myList[0].Count; i++)
             {
@@ -72,7 +71,6 @@ namespace GarageProject
         }
         private void BindGrid()
         {
-            DBConnect myDBConnect = new DBConnect();
             List<string>[] myList = myDBConnect.GetAppointments(string.Empty, string.Empty);
             dgMonteur.Rows.Clear();
             for (int i = 0; i < myList[0].Count; i++)
@@ -96,7 +94,6 @@ namespace GarageProject
         {
             try
             {
-                DBConnect myDBConnect = new DBConnect();
                 List<string>[] myList = myDBConnect.GetParts(dgselectedid);
                 dgOnderdelen.Rows.Clear();
                 for (int i = 0; i < myList[0].Count; i++)
@@ -126,7 +123,6 @@ namespace GarageProject
             string sMaand = dtpPlanningDag.Text.Substring(3, 2);
             string sJaar = dtpPlanningDag.Text.Substring(6, 4);
             string sTotDatum = sJaar + "-" + sMaand + "-" + sDag;
-            DBConnect myDBConnect = new DBConnect();
             List<string>[] myList = myDBConnect.GetAppointments(sTotDatum, string.Empty);
             dgMonteur.Rows.Clear();
             for (int i = 0; i < myList[0].Count; i++)
@@ -168,7 +164,6 @@ namespace GarageProject
         private void btnOpslaan_Click(object sender, EventArgs e)
         {
             int dgId = Convert.ToInt32(dgselectedid);
-            DBConnect myDBConnect = new DBConnect();
             myDBConnect.UpdateStatusMonteurOpmerking(cboWerkplaatsStatus.SelectedItem.ToString(), "", tbxOpmerking.Text, Convert.ToInt32(dgselectedid));
             BindGrid();
         }
@@ -194,7 +189,6 @@ namespace GarageProject
             if (dgselectedid != "")
             {
                 //Haal van het onderdeel de prijs en id op met de naam van het onderdeel uit de combobox cboOnderdeel 
-                DBConnect myDBConnect = new DBConnect();
                 List<string>[] myList = myDBConnect.GetPartsIDAndPrice(cboOnderdeel.SelectedItem.ToString());
                 for (int i = 0; i < myList[0].Count; i++)
                 {
@@ -242,9 +236,51 @@ namespace GarageProject
             }
         }
 
-        private void btnZoekMonteur_Click(object sender, EventArgs e)
+        private void btnOnderdeelverwijderen_Click(object sender, EventArgs e)
         {
+            string partsid = string.Empty;
+            string query = string.Empty;
+            string onderdeelid = string.Empty;
+
+            //Haal de appointment id op uit het datagrid dgmonteur
+            try
+            {
+                foreach (DataGridViewRow row in dgMonteur.SelectedRows)
+                {
+                    dgselectedid = row.Cells[0].Value.ToString();
+                }
+            }
+            catch { }
+
+
+            try
+            {
+                foreach (DataGridViewRow row in dgOnderdelen.SelectedRows)
+                {
+                    onderdeelid = row.Cells[0].Value.ToString();
+                }
+            }
+            catch { }
+
+            if (dgselectedid != string.Empty && onderdeelid != string.Empty)
+            {
+                query = "Delete from appointment_part where appointment_id = " + dgselectedid + " and part_id = " + onderdeelid;
+                myDBConnect.ExecuteSQL(query);
+                RefreshdgOnderdeel();
+            }
+       
+
 
         }
-    }
+
+        private void dgOnderdelen_SelectionChanged(object sender, EventArgs e)
+        {
+
+
+
+            //Als er een parts.id is gevonden, kan er een databaserij worden ingevoegd
+
+
+            }
+        }
 }

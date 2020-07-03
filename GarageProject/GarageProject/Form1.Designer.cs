@@ -66,6 +66,7 @@
             this.tbxWachtwoord.Name = "tbxWachtwoord";
             this.tbxWachtwoord.Size = new System.Drawing.Size(100, 20);
             this.tbxWachtwoord.TabIndex = 3;
+            this.tbxWachtwoord.UseSystemPasswordChar = true;
             // 
             // btnInlog
             // 
@@ -81,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 260);
+            this.ClientSize = new System.Drawing.Size(535, 255);
             this.Controls.Add(this.btnInlog);
             this.Controls.Add(this.tbxWachtwoord);
             this.Controls.Add(this.tbxEmail);
@@ -90,7 +91,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inloggen";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

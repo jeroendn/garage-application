@@ -59,6 +59,7 @@
             this.lblAantal = new System.Windows.Forms.Label();
             this.tbxAantal = new System.Windows.Forms.TextBox();
             this.btnOpslaan = new System.Windows.Forms.Button();
+            this.btnOnderdeelverwijderen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgMonteur)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgOnderdelen)).BeginInit();
             this.SuspendLayout();
@@ -156,6 +157,7 @@
             this.dgOnderdelen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgOnderdelen.Size = new System.Drawing.Size(576, 105);
             this.dgOnderdelen.TabIndex = 4;
+            this.dgOnderdelen.SelectionChanged += new System.EventHandler(this.dgOnderdelen_SelectionChanged);
             // 
             // PartID
             // 
@@ -309,11 +311,22 @@
             this.btnOpslaan.UseVisualStyleBackColor = true;
             this.btnOpslaan.Click += new System.EventHandler(this.btnOpslaan_Click);
             // 
+            // btnOnderdeelverwijderen
+            // 
+            this.btnOnderdeelverwijderen.Location = new System.Drawing.Point(296, 476);
+            this.btnOnderdeelverwijderen.Name = "btnOnderdeelverwijderen";
+            this.btnOnderdeelverwijderen.Size = new System.Drawing.Size(145, 34);
+            this.btnOnderdeelverwijderen.TabIndex = 22;
+            this.btnOnderdeelverwijderen.Text = "Onderdeel Verwijderen";
+            this.btnOnderdeelverwijderen.UseVisualStyleBackColor = true;
+            this.btnOnderdeelverwijderen.Click += new System.EventHandler(this.btnOnderdeelverwijderen_Click);
+            // 
             // Monteur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 730);
+            this.Controls.Add(this.btnOnderdeelverwijderen);
             this.Controls.Add(this.btnOpslaan);
             this.Controls.Add(this.tbxAantal);
             this.Controls.Add(this.lblAantal);
@@ -378,5 +391,6 @@
         private System.Windows.Forms.TextBox tbxAantal;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.Button btnOpslaan;
+        private System.Windows.Forms.Button btnOnderdeelverwijderen;
     }
 }

@@ -176,11 +176,11 @@ namespace GarageProject
                 myMonth = myMonth.Substring(1, 1);
             }
 
-            string query = "select sum(total_price) as totalprice, sum(hours) as uren from appointments where Month(appointments.created_at) = " + myMonth +
-                           " and Year(appointments.created_at) = " + myYear + " and status_id = 5";
-
             try
             {
+                //In deze query worden de omzet(total price) en de uren per maand opgeteld.
+                string query = "select sum(total_price) as totalprice, sum(hours) as uren from appointments where Month(appointments.created_at) = " + myMonth +
+                               " and Year(appointments.created_at) = " + myYear + " and status_id = 5";
                 List<string>[] myList = myDBConnect.GetMonthlyRevenueAndHours(query, "totalprice", "uren");
                 for (int i = 0; i < myList[0].Count; i++)
                 {

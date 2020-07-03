@@ -79,10 +79,6 @@ namespace GarageProject
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            tbxEmail.Text = "hans.jaspers@garageochten.nl";
-            tbxWachtwoord.Text = "wordpress";
-        }
+
     }
 }

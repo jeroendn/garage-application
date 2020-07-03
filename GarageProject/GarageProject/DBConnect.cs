@@ -136,6 +136,7 @@ namespace GarageProject
         {
             string query = "SELECT employees.id, employees.firstname, employees.lastname, employee_roles.role FROM employees " +
                            "Left Join employee_roles on (employees.role_id = employee_roles.id) where employee_roles.role = 'monteur'";
+            string myDate = string.Empty;
 
             //Create a list to store the result
             List<string>[] list = new List<string>[4];
@@ -183,12 +184,13 @@ namespace GarageProject
             //Het moet een left join zijn, omdat we alle appointments willen zien en anders de lijst ingekort wordt bij een inner join
 
             string query = string.Empty;
+            string myDate = string.Empty;
 
 
             if (sDatum == string.Empty && sMonth == string.Empty)
             {
                 //Alle appointments weergeven
-                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, appointments.created_at, " +
+                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, date(appointments.created_at) as createdat, " +
                         "appointment_status.status, employees.firstname, employees.lastname FROM appointments " +
                         "Left Join appointment_status ON(appointments.status_id = appointment_status.id) " +
                         "Left Join employees ON(appointments.mechanic_id = employees.id) order by appointments.created_at desc";
@@ -196,14 +198,14 @@ namespace GarageProject
             else if (sDatum != string.Empty && sMonth == string.Empty)
             {
                 //Zoeken op dag
-                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, appointments.created_at, " +
+                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, date(appointments.created_at) as createdat, " +
                          "appointment_status.status, employees.firstname, employees.lastname FROM appointments " +
                          "Left Join appointment_status ON(appointments.status_id = appointment_status.id) " +
                          "Left Join employees ON(appointments.mechanic_id = employees.id) where appointments.created_at = '" + sDatum + "' order by appointments.created_at desc";
             }
             else if (sMonth != string.Empty) // Toon data voor de eigenaar
             {
-                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, appointments.created_at, " +
+                query = "SELECT appointments.id, appointments.comment, appointments.licence_plate, appointments.hours, appointments.total_price, date(appointments.created_at) as createdat, " +
                         "appointment_status.status, employees.firstname, employees.lastname FROM appointments " +
                         "Left Join appointment_status ON(appointments.status_id = appointment_status.id) " +
                         "Left Join employees ON(appointments.mechanic_id = employees.id) where Month(appointments.created_at) = " + sMonth + 
@@ -233,12 +235,18 @@ namespace GarageProject
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
+                    myDate = dataReader["createdat"] + "";
+                    if (!string.IsNullOrEmpty(myDate))
+                    {
+                        DateTime objDate = DateTime.Parse(myDate);
+                        myDate = objDate.Day + "-" + objDate.Month + "-" + objDate.Year;
+                    }
                     list[0].Add(dataReader["id"] + "");
                     list[1].Add(dataReader["comment"] + "");
                     list[2].Add(dataReader["licence_plate"] + "");
                     list[3].Add(dataReader["hours"] + "");
                     list[4].Add(dataReader["total_price"] + "");
-                    list[5].Add(dataReader["created_at"] + "");
+                    list[5].Add(myDate); //dataReader["createdat"] + "");
                     list[6].Add(dataReader["status"] + "");
                     list[7].Add(dataReader["firstname"] + "");
                     list[8].Add(dataReader["lastname"] + "");
