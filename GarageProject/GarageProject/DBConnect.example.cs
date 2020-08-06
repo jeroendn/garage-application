@@ -26,12 +26,10 @@ namespace GarageProject
         //Initialize values
         public void Initialize()
         {
-            //ok
-            //server = "192.67.198.61";
-            server = "web0098.zxcs.nl";
-            database = "u71481p69034_garage";
-            uid = "u71481p69034_garage";
-            password = "C3Zagza3R";
+            server = "host";
+            database = "database";
+            uid = "username";
+            password = "password";
             string connectionString;
             connectionString = "SERVER=" + server + ";" +
                                 "DATABASE=" + database + ";" +
